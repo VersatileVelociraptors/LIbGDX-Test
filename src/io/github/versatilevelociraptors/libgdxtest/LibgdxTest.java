@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.audio.Mp3.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,8 @@ public class LibgdxTest implements ApplicationListener{
 	private float r,g,b;
 	
 	private int timer;
+	
+	Sound coco;
 
 	public static void main(String[] agrs){
 		
@@ -47,6 +50,8 @@ public class LibgdxTest implements ApplicationListener{
 		texture = new Texture("assets/images/VersatileVelociraptors.png");
 		fps = new FPSLogger();
 		timer = 30;
+		coco = (Sound) Gdx.audio.newSound(Gdx.files.internal("assets/music/coco.mp3"));
+		coco.play();
 	}
 	
 	@Override
@@ -76,6 +81,9 @@ public class LibgdxTest implements ApplicationListener{
 
 	@Override
 	public void dispose() {
+		coco.dispose();
+		batch.dispose();
+		texture.dispose();
 	}
 
 	@Override
