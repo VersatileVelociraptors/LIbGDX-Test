@@ -28,7 +28,7 @@ public class CocoState extends State {
 
 	private Sound coco;
 
-	private boolean stopped;
+	private boolean CocoStopped;
 
 	public CocoState(GameStateManager manager){
 		super(manager);
@@ -39,7 +39,7 @@ public class CocoState extends State {
 		timer = 30;
 		font = new BitmapFont();
 		coco = (Sound) Gdx.audio.newSound(Gdx.files.internal("assets/music/coco.mp3"));
-		coco.play(.4f);
+		coco.loop(.4f);
 	}
 
 	@Override
@@ -57,11 +57,11 @@ public class CocoState extends State {
 		
 		// the s key start/stops music
 		if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
-			if(stopped)
-				coco.play(.5f);
+			if(CocoStopped)
+				coco.loop(.4f);
 			else
 				coco.stop();
-			stopped = !stopped;
+			CocoStopped = !CocoStopped;
 		}
 
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -71,7 +71,11 @@ public class CocoState extends State {
 		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - texture.getHeight()/2);
 		font.setColor(new Color(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f));
 		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX, (int)textY);
-		font.draw(batch, "Press 's' to start/stop coco", 20, 20);
+		if(CocoStopped){
+			font.draw(batch, "Press 's' to start coco", 20, 20);
+		}else{
+			font.draw(batch, "Press 's' to stop coco", 20, 20);
+		}
 		batch.end();
 		fps.log();
 		timer--;
