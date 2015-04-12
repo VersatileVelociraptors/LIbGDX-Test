@@ -67,8 +67,8 @@ public class LibgdxTest implements ApplicationListener{
 			g = (float)Math.random();
 			b = (float)Math.random();
 			
-			text_x = Math.random() * HEIGHT;
-			text_y = Math.random() * WIDTH;
+			text_x = Math.random() * getHeight();
+			text_y = Math.random() * getWidth();
 			
 			timer = 30;
 		}
@@ -97,6 +97,7 @@ public class LibgdxTest implements ApplicationListener{
 			coco.dispose();
 		batch.dispose();
 		texture.dispose();
+		font.dispose();
 	}
 
 	@Override
