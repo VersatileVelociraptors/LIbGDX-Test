@@ -2,6 +2,7 @@ package io.github.versatilevelociraptors;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,12 +16,14 @@ public class Game implements ApplicationListener {
 	
 	private SpriteBatch batch;
 	private Texture texture;
+	private FPSLogger fps;
 	
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		texture = new Texture("assets/images/VersatileVelociraptors.png");
+		fps = new FPSLogger();
 	}
 	
 	@Override
@@ -29,6 +32,7 @@ public class Game implements ApplicationListener {
 		batch.begin();
 		batch.draw(texture , 0 , 0);
 		batch.end();
+		fps.log();
 	}
 
 	@Override

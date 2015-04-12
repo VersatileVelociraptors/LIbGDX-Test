@@ -9,6 +9,12 @@ public class LibgdxTest {
 		
 		LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
 		
+		//disable frame limiter
+		configuration.vSyncEnabled = false;
+		configuration.foregroundFPS = 0;
+		configuration.backgroundFPS = 0;
+		
+		//set window options
 		configuration.title = Game.TITLE;
 		configuration.width = Game.WIDTH * Game.SCALE;
 		configuration.height = Game.HEIGHT * Game.SCALE;
