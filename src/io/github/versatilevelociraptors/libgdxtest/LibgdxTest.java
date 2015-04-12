@@ -2,6 +2,7 @@ package io.github.versatilevelociraptors.libgdxtest;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.audio.Mp3.Sound;
@@ -57,7 +58,7 @@ public class LibgdxTest implements ApplicationListener{
 		timer = 30;
 		font = new BitmapFont();
 		coco = (Sound) Gdx.audio.newSound(Gdx.files.internal("assets/music/coco.mp3"));
-		coco.play();
+		coco.play(.5f);
 	}
 	
 	@Override
@@ -72,12 +73,17 @@ public class LibgdxTest implements ApplicationListener{
 			
 			timer = 30;
 		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.S))
+			coco.stop();
+		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(r, g, b, 1);
 		batch.begin();
 		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, getHeight() - Gdx.input.getY() - texture.getHeight()/2/*had to subtract from height to invert the y axis*/);
 		font.setColor(new Color(1.0f - r, 1.0f - g, 1.0f - b, 1.0f));
 		font.draw(batch, "SMOKE WEED EVERYDAY", (int)text_x, (int)text_y);
+		font.draw(batch, "Press 's' to stop coco", 20, 20);
 		batch.end();
 		fps.log();
 		timer--;
