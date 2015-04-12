@@ -19,13 +19,17 @@ public class LibgdxTest implements ApplicationListener{
 	private SpriteBatch batch;
 	private Texture texture;
 	private FPSLogger fps;
+	
+	private float r,g,b;
+	
+	private int timer;
 
 	public static void main(String[] agrs){
 		
 		LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
 		
 		//disable frame limiter
-		configuration.vSyncEnabled = false;
+		configuration.vSyncEnabled = true;
 		configuration.foregroundFPS = 0;
 		configuration.backgroundFPS = 0;
 		
@@ -42,15 +46,24 @@ public class LibgdxTest implements ApplicationListener{
 		batch = new SpriteBatch();
 		texture = new Texture("assets/images/VersatileVelociraptors.png");
 		fps = new FPSLogger();
+		timer = 30;
 	}
 	
 	@Override
 	public void render() {
+		if(timer == 0){
+			r = (float)Math.random();
+			g = (float)Math.random();
+			b = (float)Math.random();
+			timer = 30;
+		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl20.glClearColor(r, g, b, 1);
 		batch.begin();
 		batch.draw(texture , 0 , 0);
 		batch.end();
 		fps.log();
+		timer--;
 	}
 
 	@Override
