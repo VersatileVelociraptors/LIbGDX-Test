@@ -16,6 +16,7 @@ public class LibgdxTest implements ApplicationListener{
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
 	public static final double SCALE = 1.5;
+	public static final boolean COPS = true;
 	
 	private SpriteBatch batch;
 	private Texture texture;
@@ -81,7 +82,8 @@ public class LibgdxTest implements ApplicationListener{
 
 	@Override
 	public void dispose() {
-		coco.dispose();
+		if(COPS)
+			coco.dispose();
 		batch.dispose();
 		texture.dispose();
 	}
