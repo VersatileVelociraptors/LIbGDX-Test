@@ -17,7 +17,7 @@ public class CocoState extends State {
 	public static final boolean COPS = true;
 
 	private SpriteBatch batch;
-	private BitmapFont font;
+	private BitmapFont font , textFont;
 	private Texture texture;
 	private FPSLogger fps;
 
@@ -38,6 +38,7 @@ public class CocoState extends State {
 		fps = new FPSLogger();
 		timer = 30;
 		font = new BitmapFont();
+		textFont = new BitmapFont();
 		coco = (Sound) Gdx.audio.newSound(Gdx.files.internal("assets/music/coco.mp3"));
 		coco.loop(.4f);
 	}
@@ -69,13 +70,15 @@ public class CocoState extends State {
 		batch.begin();
 		// had to subtract from height to invert the y axis
 		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - texture.getHeight()/2);
-		font.setColor(new Color(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f));
+		font.setColor(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f);
+		textFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX, (int)textY);
 		if(CocoStopped){
-			font.draw(batch, "Press 's' to start coco", 20, 20);
+			textFont.draw(batch, "Press 's' to start coco", 5, 15);
 		}else{
-			font.draw(batch, "Press 's' to stop coco", 20, 20);
+			textFont.draw(batch, "Press 's' to stop coco", 5, 18);
 		}
+		textFont.draw(batch, Gdx.graphics.getFramesPerSecond() + " FPS", 0, LibgdxTest.getHeight());
 		batch.end();
 		fps.log();
 		timer--;
