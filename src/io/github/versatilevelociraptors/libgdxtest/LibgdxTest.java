@@ -1,7 +1,7 @@
 package io.github.versatilevelociraptors.libgdxtest;
 
-import io.github.versatilevelociraptors.libgdxtest.States.CocoState;
-import io.github.versatilevelociraptors.libgdxtest.States.GameStateManager;
+import io.github.versatilevelociraptors.libgdxtest.states.CocoState;
+import io.github.versatilevelociraptors.libgdxtest.states.GameStateManager;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -64,7 +64,7 @@ public class LibgdxTest implements ApplicationListener{
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
+	public void resize(int width, int height) {
 	}
 
 	@Override

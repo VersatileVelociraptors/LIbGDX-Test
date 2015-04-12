@@ -1,4 +1,4 @@
-package io.github.versatilevelociraptors.libgdxtest.States;
+package io.github.versatilevelociraptors.libgdxtest.states;
 
 import io.github.versatilevelociraptors.libgdxtest.LibgdxTest;
 
@@ -21,8 +21,8 @@ public class CocoState extends State {
 	private Texture texture;
 	private FPSLogger fps;
 
-	private float r,g,b;
-	private double text_x, text_y;
+	private float red,green,blue;
+	private double textX, textY;
 
 	private int timer;
 
@@ -45,12 +45,12 @@ public class CocoState extends State {
 	@Override
 	protected void render() {
 		if(timer == 0){
-			r = (float)Math.random();
-			g = (float)Math.random();
-			b = (float)Math.random();
+			red = (float)Math.random();
+			green = (float)Math.random();
+			blue = (float)Math.random();
 
-			text_x = Math.random() * LibgdxTest.getWidth();
-			text_y = Math.random() * LibgdxTest.getHeight();
+			textX = Math.random() * LibgdxTest.getWidth();
+			textY = Math.random() * LibgdxTest.getHeight();
 
 			timer = 30;
 		}
@@ -65,11 +65,12 @@ public class CocoState extends State {
 		}
 
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Gdx.gl20.glClearColor(r, g, b, 1);
+		Gdx.gl20.glClearColor(red, green, blue, 1);
 		batch.begin();
-		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - texture.getHeight()/2/*had to subtract from height to invert the y axis*/);
-		font.setColor(new Color(1.0f - r, 1.0f - g, 1.0f - b, 1.0f));
-		font.draw(batch, "SMOKE WEED EVERYDAY", (int)text_x, (int)text_y);
+		// had to subtract from height to invert the y axis
+		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - texture.getHeight()/2);
+		font.setColor(new Color(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f));
+		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX, (int)textY);
 		font.draw(batch, "Press 's' to start/stop coco", 20, 20);
 		batch.end();
 		fps.log();

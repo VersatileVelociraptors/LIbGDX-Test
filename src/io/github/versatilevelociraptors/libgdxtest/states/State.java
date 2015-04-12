@@ -1,4 +1,4 @@
-package io.github.versatilevelociraptors.libgdxtest.States;
+package io.github.versatilevelociraptors.libgdxtest.states;
 
 import io.github.versatilevelociraptors.libgdxtest.LibgdxTest;
 
