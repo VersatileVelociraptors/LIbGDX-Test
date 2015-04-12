@@ -66,7 +66,7 @@ public class LibgdxTest implements ApplicationListener{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(r, g, b, 1);
 		batch.begin();
-		batch.draw(texture , Gdx.input.getX() , getHeight() - Gdx.input.getY()/*had to subtract from height to invert the y axis*/);
+		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, getHeight() - Gdx.input.getY() - texture.getHeight()/2/*had to subtract from height to invert the y axis*/);
 		batch.end();
 		fps.log();
 		timer--;
@@ -90,6 +90,7 @@ public class LibgdxTest implements ApplicationListener{
 
 	@Override
 	public void pause() {
+		
 	}
 
 	@Override
