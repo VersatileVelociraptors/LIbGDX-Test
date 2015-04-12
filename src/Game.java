@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Game implements ApplicationListener {
 	
 	public static final String TITLE = "LibGDX-Test";
-	public static final int WIDTH = 360;
-	public static final int HEIGHT = 200;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 360;
 	public static final int SCALE = 3;
 	
 	private SpriteBatch batch;
