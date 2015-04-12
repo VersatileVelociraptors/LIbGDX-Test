@@ -14,7 +14,7 @@ public class LibgdxTest implements ApplicationListener{
 	public static final String TITLE = "LibGDX-Test";
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
-	public static final int SCALE = 2;
+	public static final double SCALE = 1.5;
 	
 	private SpriteBatch batch;
 	private Texture texture;
@@ -35,8 +35,8 @@ public class LibgdxTest implements ApplicationListener{
 		
 		//set window options
 		configuration.title = TITLE;
-		configuration.width = WIDTH * SCALE;
-		configuration.height = HEIGHT * SCALE;
+		configuration.width = getWidth();
+		configuration.height = getHeight();
 		
 		new LwjglApplication(new LibgdxTest() , configuration);
 	}
@@ -60,10 +60,18 @@ public class LibgdxTest implements ApplicationListener{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(r, g, b, 1);
 		batch.begin();
-		batch.draw(texture , 0 , 0);
+		batch.draw(texture , Gdx.input.getX() , getHeight() - Gdx.input.getY()/*had to subtract from height to invert the y axis*/);
 		batch.end();
 		fps.log();
 		timer--;
+	}
+	
+	public static int getHeight(){
+		return (int)(HEIGHT*SCALE);
+	}
+
+	public static int getWidth(){
+		return (int)(WIDTH*SCALE);
 	}
 
 	@Override
