@@ -25,7 +25,7 @@ public class LibgdxTest implements ApplicationListener{
 	
 	private int timer;
 	
-	Sound coco;
+	private Sound coco;
 
 	public static void main(String[] agrs){
 		
