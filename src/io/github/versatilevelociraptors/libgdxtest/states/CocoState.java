@@ -1,11 +1,11 @@
 package io.github.versatilevelociraptors.libgdxtest.states;
 
 import io.github.versatilevelociraptors.libgdxtest.LibgdxTest;
+import io.github.versatilevelociraptors.libgdxtest.entities.CocoGuy;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl.audio.Mp3.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,7 +18,7 @@ public class CocoState extends State {
 
 	private SpriteBatch batch;
 	private BitmapFont font , textFont;
-	private Texture texture;
+	private Texture versatileVelociraptors;
 	private FPSLogger fps;
 
 	private float red,green,blue;
@@ -30,17 +30,20 @@ public class CocoState extends State {
 
 	private boolean CocoStopped;
 
+	private CocoGuy cocoGuy;
+
 	public CocoState(GameStateManager manager){
 		super(manager);
 
 		batch = new SpriteBatch();
-		texture = new Texture("assets/images/VersatileVelociraptors.png");
+		versatileVelociraptors = new Texture("assets/images/VersatileVelociraptors.png");
 		fps = new FPSLogger();
 		timer = 30;
 		font = new BitmapFont();
 		textFont = new BitmapFont();
 		coco = (Sound) Gdx.audio.newSound(Gdx.files.internal("assets/music/coco.mp3"));
 		coco.loop(.4f);
+		cocoGuy = new CocoGuy(10,10);
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class CocoState extends State {
 
 			timer = 30;
 		}
-		
+
 		// the s key start/stops music
 		if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
 			if(CocoStopped)
@@ -68,17 +71,21 @@ public class CocoState extends State {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(red, green, blue, 1);
 		batch.begin();
+		
 		// had to subtract from height to invert the y axis
-		batch.draw(texture , Gdx.input.getX() - texture.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - texture.getHeight()/2);
+		batch.draw(versatileVelociraptors , Gdx.input.getX() - versatileVelociraptors.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - versatileVelociraptors.getHeight()/2);
+		cocoGuy.render(batch);
+		
 		font.setColor(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f);
 		textFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX, (int)textY);
 		if(CocoStopped){
-			textFont.draw(batch, "Press 's' to start coco", 5, 15);
+			textFont.draw(batch, "Press 's' to start coco", 5, 18);
 		}else{
 			textFont.draw(batch, "Press 's' to stop coco", 5, 18);
 		}
 		textFont.draw(batch, Gdx.graphics.getFramesPerSecond() + " FPS", 0, LibgdxTest.getHeight());
+		
 		batch.end();
 		fps.log();
 		timer--;
@@ -90,7 +97,8 @@ public class CocoState extends State {
 		if(COPS)
 			coco.dispose();
 		batch.dispose();
-		texture.dispose();
+		versatileVelociraptors.dispose();
+		cocoGuy.dispose();
 		font.dispose();
 	}
 }

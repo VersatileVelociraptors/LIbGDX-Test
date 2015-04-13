@@ -10,8 +10,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 public class LibgdxTest implements ApplicationListener{
 
 	public static final String TITLE = "LibGDX-Test";
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 360;
+	private static final int WIDTH = 640;
+	private static final int HEIGHT = 360;
 	public static final double SCALE = 1.5;
 
 	private GameStateManager manager;
