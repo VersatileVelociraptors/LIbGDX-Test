@@ -30,8 +30,19 @@ public class CocoGuy {
 		locationY = 60;
 	}
 
+	public CocoGuy(int speedX , int speedY , int locationX , int locationY){
+		COCO_GUY = new Texture("assets/images/cocoGuy.png");
+		this.speedX = speedX;
+		this.speedY = speedY;
+		//TODO throw an error if not bound in the area
+		this.locationX = locationX;
+		this.locationY = locationY;
+	}
+
 
 	public int getSpeedX(){
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			return 0;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
 			return speedX;
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
@@ -40,6 +51,8 @@ public class CocoGuy {
 	}
 
 	public int getSpeedY(){
+		if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			return 0;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP))
 			return speedY;
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN))
@@ -52,6 +65,8 @@ public class CocoGuy {
 		boolean rightCondition = locationX+getTexture().getWidth() <= LibgdxTest.getWidth() || getSpeedX() <= 0;
 		if(leftCondition &&  rightCondition)
 			locationX += getSpeedX();
+		locationX = locationX < 0 ? 0 : locationX;
+		locationX = locationX+getTexture().getWidth() > LibgdxTest.getWidth() ? LibgdxTest.getWidth()-getTexture().getWidth() : locationX ;
 		return locationX;
 	}
 
@@ -60,6 +75,8 @@ public class CocoGuy {
 		boolean topCondition = locationY+getTexture().getHeight() <= LibgdxTest.getHeight() || getSpeedY() <= 0;
 		if(botomCondition && topCondition)
 			locationY += getSpeedY();
+		locationY = locationY < 0 ? 0 : locationY;
+		locationY = locationY+getTexture().getHeight() > LibgdxTest.getHeight() ? LibgdxTest.getHeight()-getTexture().getHeight() : locationY ;
 		return locationY;
 	}
 

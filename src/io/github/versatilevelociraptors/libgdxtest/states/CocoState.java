@@ -71,21 +71,20 @@ public class CocoState extends State {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(red, green, blue, 1);
 		batch.begin();
-		
+
 		// had to subtract from height to invert the y axis
 		batch.draw(versatileVelociraptors , Gdx.input.getX() - versatileVelociraptors.getWidth()/2, LibgdxTest.getHeight() - Gdx.input.getY() - versatileVelociraptors.getHeight()/2);
-		cocoGuy.render(batch);
-		
+		cocoGuy.render(batch);		
 		font.setColor(1.0f - red, 1.0f - green, 1.0f - blue, 1.0f);
 		textFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX, (int)textY);
+		font.draw(batch, "SMOKE WEED EVERYDAY", (int)textX , (int)textY);
 		if(CocoStopped){
 			textFont.draw(batch, "Press 's' to start coco", 5, 18);
 		}else{
 			textFont.draw(batch, "Press 's' to stop coco", 5, 18);
 		}
 		textFont.draw(batch, Gdx.graphics.getFramesPerSecond() + " FPS", 0, LibgdxTest.getHeight());
-		
+
 		batch.end();
 		fps.log();
 		timer--;
